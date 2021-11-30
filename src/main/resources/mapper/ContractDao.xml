@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjh.mapper.ContractDao">
+    <select id="sectionSelect" resultType="com.sjh.pojo.Contract">
+        select * from contract where
+            con_csd  BETWEEN  '2020-01-01' AND '2022-01-01';
+    </select>
+    <select id="moHuSelect " resultType="com.sjh.pojo.Contract">
+        select *  from contract
+        <where>
+            1=1
+            <if test="con_id != null and con_id != ''">
+                and con_id= #{con_id}
+            </if>
+            <if test="con_tsn != null and con_tsn != ''">
+                and con_tsn like concat("%",#{con_tsn},"%")
+            </if>
+        </where>
+    </select>
+<!-- 新增 -->
+    <insert id="addNewContractInfo"  useGeneratedKeys="true" keyProperty="con_id">
+        <!--insert contract (con_application, con_contract,con_ct,con_topic,con_name,con_rd,
+         con_allocation,con_quantity,con_up,con_money,con_agent,con_tsn,con_rp,con_dop,
+         con_taftd,con_intensive,con_remark,con_pm,con_qs,con_csd,con_cat,con_wtaotg,con_aat,
+         con_pn,con_taote,con_tst,con_tcc,con_cs,con_state)
+         value (#{con_application},#{con_contract},#{con_ct},#{con_topic},#{con_name},
+         #{con_rd},#{con_allocation},#{con_quantity},#{con_up},#{con_money},#{con_agent},
+         #{con_tsn},#{con_rp},#{con_dop},#{con_taftd},#{con_intensive},#{con_remark},#{con_pm},
+         #{con_qs},#{con_csd},#{con_cat},#{con_wtaotg},#{con_aat},#{con_pn},#{con_taote},
+         #{con_tst},#{con_tcc},#{con_cs},#{con_state})-->
+         insert into contract
+         <trim prefix="(" suffix=")" suffixOverrides=",">
+             <if test="con_application != null and con_application !=''">
+                 con_application,
+             </if>
+             <if test="con_contract != null and con_contract!=''">
+                 con_contract,
+             </if>
+             <if test="con_ct != null and con_ct !=''">
+                 con_ct,
+             </if>
+             <if test="con_topic != null and con_topic !=''">
+                 con_topic,
+             </if>
+             <if test="con_name != null and con_name !=''">
+                 con_name,
+             </if>
+             <if test="con_rd != null and con_rd !=''">
+                 con_rd,
+             </if>
+             <if test="con_allocation != null and con_allocation !=''">
+                 con_allocation,
+             </if>
+             <if test="con_quantity != null and con_quantity!=''">
+                 con_quantity,
+             </if>
+             <if test="con_up != null and con_up !=''">
+                 con_up,
+             </if>
+             <if test="con_money != null and con_money !=''">
+                 con_money,
+             </if>
+             <if test="con_agent != null and con_agent !=''">
+                 con_agent,
+             </if>
+             <if test="con_tsn != null and con_tsn !=''">
+                 con_tsn,
+             </if>
+             <if test="con_rp != null and con_rp !=''">
+                 con_rp,
+             </if>
+             <if test="con_dop != null and con_dop!=''">
+                 con_dop,
+             </if>
+             <if test="con_taftd != null and con_taftd !=''">
+                 con_taftd,
+             </if>
+             <if test="con_intensive != null and con_intensive!=''">
+                 con_intensive,
+             </if>
+             <if test="con_remark != null and con_remark !=''">
+                 con_remark,
+             </if>
+             <if test="con_pm != null and con_pm !=''">
+                 con_pm,
+             </if>
+             <if test="con_qs != null and con_qs !=''">
+                 con_qs,
+             </if>
+             <if test="con_csd != null and con_csd !=''">
+                 con_csd,
+             </if>
+             <if test="con_cat != null and con_cat!=''">
+                 con_cat,
+             </if>
+             <if test="con_wtaotg != null and con_wtaotg !=''">
+                 con_wtaotg,
+             </if>
+             <if test="con_aat != null and con_aat !=''">
+                 con_aat,
+             </if>
+             <if test="con_pn != null and con_pn !=''">
+                 con_pn,
+             </if>
+             <if test="con_taote != null and con_taote !=''">
+                 con_taote,
+             </if>
+             <if test="con_tst != null and con_tst!=''">
+                 con_tst,
+             </if>
+             <if test="con_tcc != null and con_tcc !=''">
+                 con_tcc,
+             </if>
+             <if test="con_cs != null and con_cs !=''">
+                 con_cs,
+             </if>
+             <if test="con_state != null and con_state!=''">
+                 con_state,
+             </if>
+         </trim>
+         <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+             <if test="con_application != null and con_application != ''">
+                 #{con_application,jdbcType=VARCHAR},
+             </if>
+             <if test="con_contract != null and con_contract != ''">
+                 #{con_contract,jdbcType=VARCHAR},
+             </if>
+             <if test="con_ct != null and con_ct != ''">
+                 #{con_ct,jdbcType=VARCHAR},
+             </if>
+             <if test="con_topic != null and con_topic != ''">
+                 #{con_topic,jdbcType=VARCHAR},
+             </if>
+             <if test="con_name != null and con_name != ''">
+                 #{con_name,jdbcType=VARCHAR},
+             </if>
+             <if test="con_rd != null and con_rd != ''">
+                 #{con_rd,jdbcType=VARCHAR},
+             </if>
+             <if test="con_allocation != null and con_allocation != ''">
+                 #{con_allocation,jdbcType=VARCHAR},
+             </if>
+             <if test="con_quantity != null and con_quantity != ''">
+                 #{con_quantity,jdbcType=VARCHAR},
+             </if>
+             <if test="con_up != null and con_up != ''">
+                 #{con_up,jdbcType=VARCHAR},
+             </if>
+             <if test="con_money != null and con_money != ''">
+                 #{con_money,jdbcType=VARCHAR},
+             </if>
+             <if test="con_agent != null and con_agent != ''">
+                 #{con_agent,jdbcType=VARCHAR},
+             </if>
+             <if test="con_tsn != null and con_tsn != ''">
+                 #{con_tsn,jdbcType=VARCHAR},
+             </if>
+             <if test="con_rp != null and con_rp != ''">
+                 #{con_rp,jdbcType=VARCHAR},
+             </if>
+             <if test="con_dop != null and con_dop != ''">
+                 #{con_dop,jdbcType=VARCHAR},
+             </if>
+             <if test="con_taftd != null and con_taftd != ''">
+                 #{con_taftd,jdbcType=VARCHAR},
+             </if>
+             <if test="con_intensive != null and con_intensive!=''">
+                 #{con_intensive,jdbcType=VARCHAR},
+             </if>
+             <if test="con_remark != null and con_remark !=''">
+                 #{con_remark,jdbcType=VARCHAR},
+             </if>
+             <if test="con_pm != null and con_pm !=''">
+                 #{con_pm,jdbcType=VARCHAR},
+             </if>
+             <if test="con_qs != null and con_qs !=''">
+                 #{con_qs,jdbcType=VARCHAR},
+             </if>
+             <if test="con_csd != null and con_csd !=''">
+                 #{con_csd,jdbcType=VARCHAR},
+             </if>
+             <if test="con_cat != null and con_cat!=''">
+                 #{con_cat,jdbcType=VARCHAR},
+             </if>
+             <if test="con_wtaotg != null  and con_wtaotg !=''">
+                 #{con_wtaotg,jdbcType=VARCHAR},
+             </if>
+             <if test="con_aat != null and con_aat !=''">
+                 #{con_aat,jdbcType=VARCHAR},
+             </if>
+             <if test="con_pn != null and con_pn !=''">
+                 #{con_pn,jdbcType=VARCHAR},
+             </if>
+             <if test="con_taote != null and con_taote !=''">
+                 #{con_taote,jdbcType=VARCHAR},
+             </if>
+             <if test="con_tst != null and con_tst!=''">
+                 #{con_tst,jdbcType=VARCHAR},
+             </if>
+             <if test="con_tcc != null and con_tcc !=''">
+                 #{con_tcc,jdbcType=VARCHAR},
+             </if>
+             <if test="con_cs != null and con_cs !=''">
+                 #{con_cs,jdbcType=VARCHAR},
+             </if>
+             <if test="con_state != null and con_state!=''">
+                 #{con_state,jdbcType=VARCHAR},
+             </if>
+         </trim>
+    </insert>
+<!-- 修改 -->
+    <update id="updateById" parameterType="com.sjh.pojo.Contract">
+        UPDATE contract
+        <set>
+            <if test="con_application!=null and con_application!=''">
+                con_application=#{con_application},
+            </if>
+            <if test="con_contract!=null and con_contract!=''">
+                con_contract=#{con_contract},
+            </if>
+            <if test="con_ct!=null and con_ct!=''">
+                con_ct=#{con_ct},
+            </if>
+            <if test="con_topic!=null and con_topic!=''">
+                con_topic=#{con_topic},
+            </if>
+            <if test="con_name!=null and con_name!=''">
+                con_name=#{con_name},
+            </if>
+            <if test="con_rd!=null and con_rd!=''">
+                con_rd=#{con_rd},
+            </if>
+            <if test="con_allocation!=null and con_allocation!=''">
+                con_allocation=#{con_allocation},
+            </if>
+            <if test="con_quantity!=null and con_quantity!=''">
+                con_quantity=#{con_quantity},
+            </if>
+            <if test="con_up!=null and con_up!=''">
+                con_up=#{con_up},
+            </if>
+            <if test="con_agent!=null and con_agent!=''">
+                con_agent=#{con_agent},
+            </if>
+            <if test="con_tsn!=null and con_tsn!=''">
+                con_tsn=#{con_tsn},
+            </if>
+            <if test="con_rp!=null and con_rp!=''">
+                con_rp=#{con_rp},
+            </if>
+            <if test="con_dop!=null and con_dop!=''">
+                con_dop=#{con_dop},
+            </if>
+            <if test="con_taftd!=null and con_taftd!=''">
+                con_taftd=#{con_taftd},
+            </if>
+            <if test="con_intensive!=null and con_intensive!=''">
+                con_intensive=#{con_intensive},
+            </if>
+            <if test="con_remark!=null and con_remark!=''">
+                con_remark=#{con_remark},
+            </if>
+            <if test="con_pm!=null and con_pm!=''">
+                con_pm=#{con_pm},
+            </if>
+            <if test="con_qs!=null and con_qs!=''">
+                con_qs=#{con_qs},
+            </if>
+            <if test="con_csd!=null and con_csd!=''">
+                con_csd=#{con_csd},
+            </if>
+            <if test="con_cat!=null and con_cat!=''">
+                con_cat=#{con_cat},
+            </if>
+            <if test="con_wtaotg!=null and con_wtaotg!=''">
+                con_wtaotg=#{con_wtaotg},
+            </if>
+            <if test="con_aat!=null and con_aat!=''">
+                con_aat=#{con_aat},
+            </if>
+            <if test="con_pn!=null and con_pn!=''">
+                con_pn=#{con_pn},
+            </if>
+            <if test="con_taote!=null and con_taote!=''">
+                con_taote=#{con_taote},
+            </if>
+            <if test="con_tst!=null and con_tst!=''">
+                con_tst=#{con_tst},
+            </if>
+            <if test="con_tcc!=null and con_tcc!=''">
+                con_tcc=#{con_tcc},
+            </if>
+            <if test="con_cs!=null and con_cs!=''">
+                con_cs=#{con_cs},
+            </if>
+            <if test="con_state!=null and con_state!=''">
+                con_state = #{con_state},
+            </if>
+
+        </set>
+         where con_id=#{con_id}
+    </update>
+<!-- 删除 -->
+    <delete id="deleteContract">
+        DELETE from contract where  con_id=#{con_id}
+    </delete>
+<!--批量删除 -->
+    <delete id="deleteContractByIds">
+        delete from contract where con_id in (${ids})
+    </delete>
+<!-- 查询 -->
+    <select id="selectall" resultType="com.sjh.pojo.Contract">
+        select * from contract order by con_id DESC
+    </select>
+
+    <select id="moHuSelect" resultType="java.lang.String">
+    select  from contract where con_name like '%'||#{con_name}||'%' and con_tsn '%'||#{con_tsn}
+    </select>
+    <select id="excelDownLoad" resultType="com.sjh.pojo.Contract">
+     select * from contract where con_id in (${ids})
+    </select>
+    <select id="querycontract" resultType="com.sjh.pojo.Contract">
+        select * from contract
+        where 1= 1
+          <if test="con_application!=null and con_application !=''">
+              and  con_application in (#{con_application})
+          </if>
+        <if test="con_contract!=null and con_contract !=''">
+            and  con_contract in (#{con_contract})
+        </if>
+        <if test="con_tcc!=null and con_tcc !=''">
+            and  con_tcc in (#{con_tcc})
+        </if>
+        <if test="con_topic!=null and con_topic !=''">
+            and  con_topic in (#{con_topic})
+        </if>
+        <if test="con_name!=null and con_name !=''">
+            and  con_name in (#{con_name})
+        </if>
+        <if test="con_rd!=null and con_rd !=''">
+            and  con_rd in (#{con_rd})
+        </if>
+        <if test="con_money!=null and con_money !=''">
+            and  con_money in (#{con_money})
+        </if>
+        <if test="con_agent!=null and con_agent !=''">
+            and  con_agent in (#{con_agent})
+        </if>
+        <if test="con_rp!=null and con_rp !=''">
+            and  con_rp in (#{con_rp})
+        </if>
+        <if test="con_csd!=null and con_csd !=''">
+            and  con_csd in (#{con_csd})
+        </if>
+        <if test="con_state!=null and con_state !=''">
+            and  con_state in (#{con_state})
+        </if>
+        <if test="con_tsn!=null and con_tsn !=''">
+            and  con_tsn in (#{con_tsn})
+        </if>
+
+    </select>
+
+</mapper>

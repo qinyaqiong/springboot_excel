@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjh.mapper.ContractAccessoryMapper">
+  <resultMap id="BaseResultMap" type="com.sjh.pojo.ContractAccessory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="accessory_name" jdbcType="VARCHAR" property="accessoryName" />
+    <result column="accessory_url" jdbcType="VARCHAR" property="accessoryUrl" />
+    <result column="contract_id" jdbcType="BIGINT" property="contractId" />
+    <result column="accessory_size" jdbcType="BIGINT" property="accessorySize" />
+    <result column="accessory_type" jdbcType="VARCHAR" property="accessoryType" />
+    <result column="accessory_comment" jdbcType="VARCHAR" property="accessoryComment" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, accessory_name, accessory_url, contract_id, accessory_size, accessory_type,accessory_comment
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_accessory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from contract_accessory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sjh.pojo.ContractAccessory">
+    insert into contract_accessory (id, accessory_name, accessory_url, 
+      contract_id, accessory_size, accessory_type,accessory_comment
+      )
+    values (#{id,jdbcType=BIGINT}, #{accessoryName,jdbcType=VARCHAR}, #{accessoryUrl,jdbcType=VARCHAR}, 
+      #{contractId,jdbcType=BIGINT}, #{accessorySize,jdbcType=BIGINT}, #{accessoryType,jdbcType=VARCHAR},
+      #{accessoryComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjh.pojo.ContractAccessory">
+    insert into contract_accessory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accessoryName != null">
+        accessory_name,
+      </if>
+      <if test="accessoryUrl != null">
+        accessory_url,
+      </if>
+      <if test="contractId != null">
+        contract_id,
+      </if>
+      <if test="accessorySize != null">
+        accessory_size,
+      </if>
+      <if test="accessoryType != null">
+        accessory_type,
+      </if>
+      <if test="accessoryComment != null">
+        accessory_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accessoryName != null">
+        #{accessoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="accessoryUrl != null">
+        #{accessoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null">
+        #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="accessorySize != null">
+        #{accessorySize,jdbcType=BIGINT},
+      </if>
+      <if test="accessoryType != null">
+        #{accessoryType,jdbcType=VARCHAR},
+      </if>
+
+      <if test="accessoryComment != null">
+        #{accessoryComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjh.pojo.ContractAccessory">
+    update contract_accessory
+    <set>
+      <if test="accessoryName != null">
+        accessory_name = #{accessoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="accessoryUrl != null">
+        accessory_url = #{accessoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null">
+        contract_id = #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="accessorySize != null">
+        accessory_size = #{accessorySize,jdbcType=BIGINT},
+      </if>
+      <if test="accessoryType != null">
+        accessory_type = #{accessoryType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjh.pojo.ContractAccessory">
+    update contract_accessory
+    set accessory_name = #{accessoryName,jdbcType=VARCHAR},
+      accessory_url = #{accessoryUrl,jdbcType=VARCHAR},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      accessory_size = #{accessorySize,jdbcType=BIGINT},
+      accessory_type = #{accessoryType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryListByContratId" resultMap="BaseResultMap">
+    select id, accessory_name, accessory_url, contract_id,
+    accessory_size, accessory_type,accessory_comment
+    from contract_accessory
+    where contract_id = #{id} order by id desc
+  </select>
+
+  <delete id="deleteByContractId">
+    delete from contract_accessory where contract_id in (${contractIds})
+  </delete>
+</mapper>
